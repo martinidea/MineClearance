@@ -3,6 +3,8 @@ package com.code.martin.mineclearance.util;
 import android.os.Handler;
 import android.os.Message;
 
+import com.code.martin.mineclearance.impl.TimeChangeListener;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
