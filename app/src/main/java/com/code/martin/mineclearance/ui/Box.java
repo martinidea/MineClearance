@@ -11,31 +11,95 @@ import com.code.martin.mineclearance.R;
  * Created by Martin on 2016/7/21.
  */
 public class Box extends View implements GestureDetector.OnGestureListener {
-    private int x, y;
+    private int x, y, num;
     private GestureDetector gestureDetector;
-    private ClickEvent event = new ClickEvent();
 
-    private OnClickEventListener onClickEventListener;
+    private final int[] RES_NUM = {
+            R.drawable.box0, R.drawable.box1, R.drawable.box2,
+            R.drawable.box3, R.drawable.box4, R.drawable.box5,
+            R.drawable.box6, R.drawable.box7, R.drawable.box8
+    };//存放资源图片ID
 
-    public void setOnClickEventListener(OnClickEventListener onClickEventListener) {
-        this.onClickEventListener = onClickEventListener;
+    private boolean open, flag, mine;
+    private CallBack callBack;
+
+    public boolean isOpen() {
+        return open;
     }
 
-    public Box(Context context) {
+    public void makeFlag() {
+        if (!isOpen()) {
+            if (isFlag()) {
+                flag = false;
+                setBackgroundResource(R.drawable.blank);
+            } else {
+                flag = true;
+                setBackgroundResource(R.drawable.flag);
+            }
+            callBack.flagChange(flag);
+        }
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public boolean isMine() {
+        return mine;
+    }
+
+    public void setMine(boolean mine) {
+        this.mine = mine;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    /**
+     * @param doubleClick 是否是双击事件触发
+     * @return 是否打开了雷
+     */
+    public void open(boolean doubleClick) {
+        if (isOpen()) {
+            if (doubleClick) {
+                callBack.DoubleClickNum(x, y);
+            }
+        } else {
+            open = true;
+            if (isMine()) {
+                callBack.clickMine();
+                setBackgroundResource(R.drawable.mine2);
+                return;
+            }
+            callBack.openSuccess();
+            setBackgroundResource(RES_NUM[getNum()]);
+            if (getNum() == 0) {
+                callBack.openZero(x, y);
+            }
+        }
+
+    }
+
+    public Box(Context context, final int x, final int y, final CallBack callBack) {
         super(context);
+        this.x = x;
+        this.y = y;
+        this.callBack = callBack;
         setBackgroundResource(R.drawable.blank);
         gestureDetector = new GestureDetector(context, this);
         gestureDetector.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
             public boolean onDoubleTap(MotionEvent e) {
-                event.setX(x);
-                event.setY(y);
                 //双击时产生一次
-                if (!BoxTable.isOK()) {
-                    event.setClickType(ClickEvent.ClickType.FirstClick);
-                } else {
-                    event.setClickType(ClickEvent.ClickType.DoubleClick);
+                if (!callBack.isOk()) {
+                    callBack.firstClick(x, y);
                 }
-                onClickEventListener.postEvent(event);
+                if (!isFlag())
+                    open(true);
                 return false;
             }
 
@@ -44,27 +108,15 @@ public class Box extends View implements GestureDetector.OnGestureListener {
             }
 
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                event.setX(x);
-                event.setY(y);
-                if (!BoxTable.isOK()) {
-                    event.setClickType(ClickEvent.ClickType.FirstClick);
+                if (!callBack.isOk()) {
+                    callBack.firstClick(x, y);
+                    open(false);
                 } else {
-                    event.setClickType(ClickEvent.ClickType.SingleClick);
+                    makeFlag();
                 }
-                onClickEventListener.postEvent(event);
                 return false;
             }
         });
-    }
-
-
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     @Override
@@ -79,7 +131,6 @@ public class Box extends View implements GestureDetector.OnGestureListener {
 
     @Override
     public void onShowPress(MotionEvent e) {
-
     }
 
     @Override
@@ -94,7 +145,6 @@ public class Box extends View implements GestureDetector.OnGestureListener {
 
     @Override
     public void onLongPress(MotionEvent e) {
-
     }
 
     @Override

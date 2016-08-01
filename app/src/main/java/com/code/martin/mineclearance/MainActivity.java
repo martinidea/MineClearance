@@ -4,22 +4,23 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.code.martin.mineclearance.ui.BoxTable;
-import com.code.martin.mineclearance.ui.OnGameListener;
 import com.code.martin.mineclearance.ui.LED;
+import com.code.martin.mineclearance.ui.OnGameListener;
 import com.code.martin.mineclearance.util.TimeChangeListener;
 import com.code.martin.mineclearance.util.TimerUtils;
 
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MainActivity extends Activity implements OnGameListener,SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends Activity implements OnGameListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     @BindView(R.id.add_button)
     ImageView addButton;
@@ -58,6 +59,10 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
             SP_EXPERT_TIME = "EXPERT_TIME", SP_PRIMARY_HERO = "PRIMARY_HERO",
             SP_MIDDLE_HERO = "MIDDLE_HERO", SP_EXPERT_HERO = "EXPERT_HERO",
             SP_NAME = "HERO_ROLL";
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    @BindView(R.id.horizontalScrollView)
+    HorizontalScrollView horizontalScrollView;
 
     private boolean firstTimeResume = true;
 
@@ -75,6 +80,7 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         init();
     }
 
@@ -83,6 +89,12 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
         boxTable.setOnGameListener(this);
         flagLED.setNum(boxTable.getRemainingFlag());
         timerUtils = new TimerUtils();
+        timerUtils.setOnTimeChangeListener(new TimeChangeListener() {
+            @Override
+            public void timeChange(int num) {
+                timeLED.setNum(num);
+            }
+        });
         difficultDialog = new AlertDialog.Builder(this).create();
         heroRollDialog = new AlertDialog.Builder(this).create();
         helpDialog = new AlertDialog.Builder(this).create();
@@ -111,7 +123,7 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
     public void click(View view) {
         switch (view.getId()) {
             case R.id.face_button:
-                startDoing();
+                restart();
                 break;
             case R.id.add_button:
                 showPopupMenu(view);
@@ -145,7 +157,6 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
     }
 
 
-
     private String time2String(int time) {
         if (time < 10)
             return "00" + time + second;
@@ -158,8 +169,9 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
     }
 
 
-
-    private void startDoing() {
+    private void restart() {
+        horizontalScrollView.scrollTo(0,0);
+        scrollView.scrollTo(0,0);
         boxTable.restart();
         faceButton.setBackgroundResource(R.drawable.face0);
         timerUtils.stop();
@@ -271,7 +283,7 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
                         boxTable.setMode(2);
                         break;
                 }
-                startDoing();
+                restart();
                 difficultDialog.dismiss();
             }
         });
@@ -286,12 +298,6 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
 
     @Override
     public void gameStart() {
-        timerUtils.setOnTimeChangeListener(new TimeChangeListener() {
-            @Override
-            public void timeChange(int num) {
-                timeLED.setNum(num);
-            }
-        });
         timerUtils.start();
     }
 
@@ -307,17 +313,17 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
         switch (boxTable.getBoxTableMode()) {
             case 0:
                 if (time < primaryTime) {
-                    showNameDialog(SP_PRIMARY_TIME,SP_PRIMARY_HERO);
+                    showNameDialog(SP_PRIMARY_TIME, SP_PRIMARY_HERO);
                 }
                 break;
             case 1:
                 if (time < middleTime) {
-                    showNameDialog(SP_MIDDLE_TIME,SP_MIDDLE_HERO);
+                    showNameDialog(SP_MIDDLE_TIME, SP_MIDDLE_HERO);
                 }
                 break;
             case 2:
                 if (time < expertTime) {
-                    showNameDialog(SP_EXPERT_TIME,SP_EXPERT_HERO);
+                    showNameDialog(SP_EXPERT_TIME, SP_EXPERT_HERO);
                 }
                 break;
         }
@@ -333,24 +339,24 @@ public class MainActivity extends Activity implements OnGameListener,SharedPrefe
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key){
+        switch (key) {
             case SP_PRIMARY_TIME:
-                primaryTime = sharedPreferences.getInt(key,primaryTime);
+                primaryTime = sharedPreferences.getInt(key, primaryTime);
                 break;
             case SP_MIDDLE_TIME:
-                middleTime = sharedPreferences.getInt(key,middleTime);
+                middleTime = sharedPreferences.getInt(key, middleTime);
                 break;
             case SP_EXPERT_TIME:
-                expertTime = sharedPreferences.getInt(key,expertTime);
+                expertTime = sharedPreferences.getInt(key, expertTime);
                 break;
             case SP_PRIMARY_HERO:
-                primaryHero= sharedPreferences.getString(key,primaryHero);
+                primaryHero = sharedPreferences.getString(key, primaryHero);
                 break;
             case SP_MIDDLE_HERO:
-                middleHero = sharedPreferences.getString(key,middleHero);
+                middleHero = sharedPreferences.getString(key, middleHero);
                 break;
             case SP_EXPERT_HERO:
-                expertHero = sharedPreferences.getString(key,expertHero);
+                expertHero = sharedPreferences.getString(key, expertHero);
                 break;
         }
     }

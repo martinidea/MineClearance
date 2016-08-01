@@ -6,7 +6,7 @@
     <color name="topbar">#ffffff</color>
     <color name="LEDbar">#999999</color>
     <color name="actionbar_text">#ffffff</color>
-    <color name="tablebackground">#555555</color>
+    <color name="tableBackground">#555555</color>
 
     <color name="LEDTextColor">#ffffff</color>
 </resources>
