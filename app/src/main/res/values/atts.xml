@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LED">
+        <attr name="num" format="integer"></attr>
+        <attr name="LEDwidth" format="dimension"></attr>
+        <attr name="LEDheight" format="dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="BoxTable">
+        <attr name="mode" format="enum">
+            <enum name="primary" value="0"></enum>
+            <enum name="middle" value="1"></enum>
+            <enum name="expert"  value="2"></enum>
+        </attr>
+        <attr name="boxwidth" format="dimension"></attr>
+        <attr name="boxheight" format="dimension"></attr>
+    </declare-styleable>
+</resources>

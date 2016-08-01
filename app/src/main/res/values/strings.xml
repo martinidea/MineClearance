@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MineClearance</string>
+    <string name="flag">Flag</string>
+    <string name="time">Time</string>
+    <string name="hero_roll">HeroRoll</string>
+    <string name="help">Help</string>
+    <string name="difficult">Hifficult</string>
+    <string name="primary">Primary</string>
+    <string name="middle">Middle</string>
+    <string name="expert">Expert</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_choose">please choose</string>
+    <string name="sure">OK</string>
+    <string name="tv_primary">Primary:</string>
+    <string name="tv_middle">Middle:</string>
+    <string name="tv_experty">Expert:</string>
+    <string name="second">s</string>
+    <string name="game_introduction">Introduce Game: \n  Game is written by the author as WinMine written by APP.\nGame rules:\n  Start: in the mine box optionally start of a mine box, open the box if the number is the number of around mine.\nProcedure: click an open box to set the mark or cancel the mark, double - click a box, if the box is opened, then automatically recognize the box.\nVictory conditions: open all the boxes without Mine.\nFail condition: open the box with Mine.</string>
+    <string name="breaking_records">breaking records</string>
+    <string name="leave_your_name">leave your name</string>
+</resources>

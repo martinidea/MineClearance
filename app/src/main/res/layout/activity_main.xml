@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/Topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_actionbar_height">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/icon_marginLeft"
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/action_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textSize="@dimen/top_bar_textSize" />
+
+        <ImageView
+            android:layout_marginRight="@dimen/menu_margin"
+            android:id="@+id/add_button"
+            android:scaleType="center"
+            android:layout_width="@dimen/add_btn_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/LEDbar"
+        android:id="@+id/LED_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/LED_bar_height"
+        android:layout_below="@+id/Topbar">
+
+        <TextView
+            android:layout_marginLeft="@dimen/LED_text_marginLeft"
+            android:gravity="center"
+            android:textColor="@color/LEDTextColor"
+            android:textSize="@dimen/LED_text_size"
+            android:text="@string/flag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.code.martin.mineclearance.ui.LED
+            android:id="@+id/flagLED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/LED_margin_left"
+            app:LEDheight="@dimen/LED_height"
+            app:LEDwidth="@dimen/LED_width">
+
+        </com.code.martin.mineclearance.ui.LED>
+
+
+        <Button
+            android:id="@+id/face_button"
+            android:layout_width="@dimen/restart_btn_width"
+            android:layout_height="@dimen/restart_btn_height"
+            android:layout_centerInParent="true"
+            android:background="@drawable/face0" />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/LED_text_marginRight"
+            android:gravity="center"
+            android:textColor="@color/LEDTextColor"
+            android:textSize="@dimen/LED_text_size"
+            android:text="@string/time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.code.martin.mineclearance.ui.LED
+            android:id="@+id/timeLED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/LED_margin_right"
+            app:LEDheight="@dimen/LED_height"
+            app:LEDwidth="@dimen/LED_width">
+
+        </com.code.martin.mineclearance.ui.LED>
+
+    </RelativeLayout>
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LED_bar"
+        android:scrollbars="none"
+        android:background="@color/tablebackground">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.code.martin.mineclearance.ui.BoxTable
+                android:id="@+id/box_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:boxheight="@dimen/box_height"
+                app:boxwidth="@dimen/box_width"
+                app:mode="middle">
+
+            </com.code.martin.mineclearance.ui.BoxTable>
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+</RelativeLayout>

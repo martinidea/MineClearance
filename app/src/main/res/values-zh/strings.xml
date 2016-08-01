@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">扫雷</string>
+    <string name="flag">标记</string>
+    <string name="time">时间</string>
+    <string name="hero_roll">英雄榜</string>
+    <string name="help">帮助</string>
+    <string name="difficult">难度</string>
+    <string name="primary">初级</string>
+    <string name="middle">中级</string>
+    <string name="expert">高级</string>
+    <string name="cancel">取消</string>
+    <string name="please_choose">请选择</string>
+    <string name="tv_primary">初级：</string>
+    <string name="tv_middle">中级：</string>
+    <string name="tv_experty">高级：</string>
+    <string name="second">秒</string>
+    <string name="game_introduction">游戏介绍：\n扫雷游戏是由作者为WinMine写的APP。\n游戏玩法：\n开局：在雷盒里随意点一个雷盒开局，打开的盒子如有数字则说明其周围雷的个数。\n过程：单击一个未打开的盒子为设置标记或取消标记，双击一个盒子，如果盒子已经打开则自动识别开盒。\n胜利条件：打开所有没有雷的盒子\n失败条件：打开有雷的盒子。</string>
+    <string name="sure">确定</string>
+    <string name="breaking_records">打破记录</string>
+    <string name="leave_your_name">留下你的名字</string>
+</resources>
