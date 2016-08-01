@@ -1,4 +1,4 @@
-package com.code.martin.mineclearance.ui;
+package com.code.martin.mineclearance.impl;
 
 /**
  * Created by Martin on 2016/7/29.

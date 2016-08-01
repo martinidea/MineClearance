@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.code.martin.mineclearance.R;
+import com.code.martin.mineclearance.impl.CallBack;
 
 /**
  * Created by Martin on 2016/7/21.

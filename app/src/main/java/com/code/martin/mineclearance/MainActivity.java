@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.code.martin.mineclearance.ui.BoxTable;
 import com.code.martin.mineclearance.ui.LED;
-import com.code.martin.mineclearance.ui.OnGameListener;
+import com.code.martin.mineclearance.impl.OnGameListener;
 import com.code.martin.mineclearance.util.TimeChangeListener;
 import com.code.martin.mineclearance.util.TimerUtils;
 

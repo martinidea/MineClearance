@@ -4,15 +4,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.code.martin.mineclearance.ALG.MineALG;
 import com.code.martin.mineclearance.ALG.Mode;
 import com.code.martin.mineclearance.R;
+import com.code.martin.mineclearance.impl.CallBack;
+import com.code.martin.mineclearance.impl.OnGameListener;
 
 import java.util.ArrayList;
 
