@@ -63,7 +63,6 @@ public class Box extends View implements GestureDetector.OnGestureListener {
 
     /**
      * @param doubleClick 是否是双击事件触发
-     * @return 是否打开了雷
      */
     public void open(boolean doubleClick) {
         if (isOpen()) {
